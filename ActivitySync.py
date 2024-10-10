@@ -51,7 +51,7 @@ def syncData(username, password, garmin_email = None, garmin_password = None):
         res = session.post(url, data, headers=headers)
 
         # get igpsport list
-        url = "https://%s/Activity/ActivityList" % igp_host
+        url = "https://%s/Activity/ActivityList?pagesize=300" % igp_host
         res = session.get(url)
         result = json.loads(res.text, strict=False)
 
@@ -105,13 +105,13 @@ def syncData(username, password, garmin_email = None, garmin_password = None):
 
         need_sync = True
 
-        for item in data:
-            if item["start_time"] == mk_time:
-                need_sync = False
-                break
-        if need_sync:
-            sync_data.append(activity)
-     #   sync_data.append(activity)
+     #   for item in data:
+      #      if item["start_time"] == mk_time:
+       #         need_sync = False
+        #        break
+       # if need_sync:
+       #     sync_data.append(activity)
+        sync_data.append(activity)
 
     if len(sync_data) == 0:
 
